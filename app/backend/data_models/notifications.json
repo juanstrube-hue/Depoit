@@ -1,0 +1,41 @@
+{
+    "title": "notifications",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "integer",
+            "description": "Primary key, auto-increment"
+        },
+        "user_id": {
+            "type": "string",
+            "description": "Recipient user ID"
+        },
+        "title": {
+            "type": "string",
+            "description": "Notification title"
+        },
+        "message": {
+            "type": "string",
+            "description": "Notification message"
+        },
+        "type": {
+            "type": "string",
+            "description": "invitation, signature, deposit, deduction, return, payment"
+        },
+        "is_read": {
+            "type": "boolean",
+            "description": "Whether notification has been read"
+        },
+        "contract_id": {
+            "type": "integer",
+            "description": "Related contract ID"
+        }
+    },
+    "required": [
+        "id",
+        "user_id",
+        "title",
+        "message",
+        "type"
+    ]
+}

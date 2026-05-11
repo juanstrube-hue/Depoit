@@ -1,0 +1,50 @@
+{
+    "title": "deposit_deductions",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "integer",
+            "description": "Primary key, auto-increment"
+        },
+        "user_id": {
+            "type": "string",
+            "description": "User who created"
+        },
+        "contract_id": {
+            "type": "integer",
+            "description": "Related contract ID"
+        },
+        "category": {
+            "type": "string",
+            "description": "cleaning, damage, unpaid_rent, other"
+        },
+        "description": {
+            "type": "string",
+            "description": "Deduction description"
+        },
+        "amount": {
+            "type": "integer",
+            "description": "Deduction amount in CLP"
+        },
+        "evidence_url": {
+            "type": "string",
+            "description": "Evidence file URL/key"
+        },
+        "status": {
+            "type": "string",
+            "description": "pending, approved, rejected"
+        },
+        "tenant_comment": {
+            "type": "string",
+            "description": "Tenant response comment"
+        }
+    },
+    "required": [
+        "id",
+        "user_id",
+        "contract_id",
+        "category",
+        "amount",
+        "status"
+    ]
+}

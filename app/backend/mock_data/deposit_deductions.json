@@ -1,0 +1,32 @@
+[
+    {
+        "contract_id": 3,
+        "category": "cleaning",
+        "description": "Limpieza profunda del departamento",
+        "amount": 120000,
+        "evidence_url": "",
+        "status": "approved",
+        "tenant_comment": "De acuerdo con el monto",
+        "user_id": "1202288"
+    },
+    {
+        "contract_id": 3,
+        "category": "damage",
+        "description": "Reparación de muro con humedad en baño",
+        "amount": 30000,
+        "evidence_url": "",
+        "status": "approved",
+        "tenant_comment": "",
+        "user_id": "1202288"
+    },
+    {
+        "contract_id": 1,
+        "category": "unpaid_rent",
+        "description": "Mes de febrero pendiente de pago",
+        "amount": 850000,
+        "evidence_url": "",
+        "status": "pending",
+        "tenant_comment": "",
+        "user_id": "1202288"
+    }
+]

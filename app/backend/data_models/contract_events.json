@@ -1,0 +1,41 @@
+{
+    "title": "contract_events",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "integer",
+            "description": "Primary key, auto-increment"
+        },
+        "user_id": {
+            "type": "string",
+            "description": "User ID"
+        },
+        "contract_id": {
+            "type": "integer",
+            "description": "Related contract ID"
+        },
+        "event_type": {
+            "type": "string",
+            "description": "created, invitation_sent, signed, deposit_received, in_custody, deduction_added, return_approved, payment_completed"
+        },
+        "title": {
+            "type": "string",
+            "description": "Event title"
+        },
+        "description": {
+            "type": "string",
+            "description": "Event description"
+        },
+        "actor_name": {
+            "type": "string",
+            "description": "Who performed the action"
+        }
+    },
+    "required": [
+        "id",
+        "user_id",
+        "contract_id",
+        "event_type",
+        "title"
+    ]
+}

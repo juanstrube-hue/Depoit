@@ -1,0 +1,37 @@
+[
+    {
+        "display_name": "Carlos Mendoza",
+        "roles": "landlord",
+        "phone": "+56 9 8765 4321",
+        "rut": "12.345.678-9",
+        "user_id": "1202288"
+    },
+    {
+        "display_name": "María Fernanda López",
+        "roles": "tenant",
+        "phone": "+56 9 7654 3210",
+        "rut": "15.678.901-2",
+        "user_id": "1202288"
+    },
+    {
+        "display_name": "Andrés Valenzuela",
+        "roles": "broker",
+        "phone": "+56 9 6543 2109",
+        "rut": "14.567.890-1",
+        "user_id": "1202288"
+    },
+    {
+        "display_name": "Catalina Rojas",
+        "roles": "landlord,tenant",
+        "phone": "+56 9 5432 1098",
+        "rut": "16.789.012-3",
+        "user_id": "1202288"
+    },
+    {
+        "display_name": "Sebastián Muñoz",
+        "roles": "tenant",
+        "phone": "+56 9 4321 0987",
+        "rut": "17.890.123-4",
+        "user_id": "1202288"
+    }
+]

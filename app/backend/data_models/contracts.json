@@ -1,0 +1,96 @@
+{
+    "title": "contracts",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "integer",
+            "description": "Primary key, auto-increment"
+        },
+        "user_id": {
+            "type": "string",
+            "description": "Creator user ID"
+        },
+        "landlord_name": {
+            "type": "string",
+            "description": "Landlord full name"
+        },
+        "landlord_email": {
+            "type": "string",
+            "description": "Landlord email"
+        },
+        "tenant_name": {
+            "type": "string",
+            "description": "Tenant full name"
+        },
+        "tenant_email": {
+            "type": "string",
+            "description": "Tenant email"
+        },
+        "broker_name": {
+            "type": "string",
+            "description": "Broker full name"
+        },
+        "broker_email": {
+            "type": "string",
+            "description": "Broker email"
+        },
+        "property_address": {
+            "type": "string",
+            "description": "Full property address"
+        },
+        "property_city": {
+            "type": "string",
+            "description": "City/Commune"
+        },
+        "property_region": {
+            "type": "string",
+            "description": "Region"
+        },
+        "property_type": {
+            "type": "string",
+            "description": "apartment, house, office, commercial"
+        },
+        "rent_amount": {
+            "type": "integer",
+            "description": "Monthly rent in CLP"
+        },
+        "deposit_amount": {
+            "type": "integer",
+            "description": "Security deposit in CLP"
+        },
+        "start_date": {
+            "type": "string",
+            "description": "Contract start date"
+        },
+        "end_date": {
+            "type": "string",
+            "description": "Contract end date"
+        },
+        "status": {
+            "type": "string",
+            "description": "draft, pending_signature, pending_payment, in_custody, in_return_process, completed, cancelled"
+        },
+        "yield_generated": {
+            "type": "integer",
+            "description": "Yield generated in CLP"
+        },
+        "signed_at": {
+            "type": "string",
+            "description": "Signature timestamp"
+        },
+        "deposit_received_at": {
+            "type": "string",
+            "description": "Deposit received timestamp"
+        }
+    },
+    "required": [
+        "id",
+        "user_id",
+        "landlord_name",
+        "tenant_name",
+        "property_address",
+        "rent_amount",
+        "deposit_amount",
+        "status"
+    ]
+}

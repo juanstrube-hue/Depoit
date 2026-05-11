@@ -1,0 +1,20 @@
+[
+    {
+        "contract_id": 3,
+        "amount_returned": 1150000,
+        "total_deductions": 150000,
+        "status": "approved",
+        "initiated_by": "landlord",
+        "notes": "Devolución parcial aprobada tras deducción por limpieza",
+        "user_id": "1202288"
+    },
+    {
+        "contract_id": 5,
+        "amount_returned": 1960000,
+        "total_deductions": 0,
+        "status": "paid",
+        "initiated_by": "tenant",
+        "notes": "Devolución completa sin deduciones",
+        "user_id": "1202288"
+    }
+]

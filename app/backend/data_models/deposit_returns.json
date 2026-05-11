@@ -1,0 +1,45 @@
+{
+    "title": "deposit_returns",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "integer",
+            "description": "Primary key, auto-increment"
+        },
+        "user_id": {
+            "type": "string",
+            "description": "User who initiated"
+        },
+        "contract_id": {
+            "type": "integer",
+            "description": "Related contract ID"
+        },
+        "amount_returned": {
+            "type": "integer",
+            "description": "Amount to return in CLP"
+        },
+        "total_deductions": {
+            "type": "integer",
+            "description": "Total deductions in CLP"
+        },
+        "status": {
+            "type": "string",
+            "description": "pending, under_review, approved, paid, rejected"
+        },
+        "initiated_by": {
+            "type": "string",
+            "description": "landlord or tenant"
+        },
+        "notes": {
+            "type": "string",
+            "description": "Additional notes"
+        }
+    },
+    "required": [
+        "id",
+        "user_id",
+        "contract_id",
+        "amount_returned",
+        "status"
+    ]
+}

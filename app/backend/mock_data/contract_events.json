@@ -1,0 +1,122 @@
+[
+    {
+        "contract_id": 1,
+        "event_type": "created",
+        "title": "Contrato creado",
+        "description": "El contrato fue creado por Carlos Mendoza",
+        "actor_name": "Carlos Mendoza",
+        "user_id": "1202288"
+    },
+    {
+        "contract_id": 1,
+        "event_type": "invitation_sent",
+        "title": "Invitación enviada",
+        "description": "Se envió invitación a María Fernanda López",
+        "actor_name": "Carlos Mendoza",
+        "user_id": "1202288"
+    },
+    {
+        "contract_id": 1,
+        "event_type": "signed",
+        "title": "Contrato firmado",
+        "description": "Todas las partes firmaron el contrato",
+        "actor_name": "María Fernanda López",
+        "user_id": "1202288"
+    },
+    {
+        "contract_id": 1,
+        "event_type": "deposit_received",
+        "title": "Depósito recibido",
+        "description": "Se recibió el depósito de $1.700.000 CLP",
+        "actor_name": "Sistema",
+        "user_id": "1202288"
+    },
+    {
+        "contract_id": 1,
+        "event_type": "in_custody",
+        "title": "Depósito en custodia",
+        "description": "Los fondos están seguros en custodia digital",
+        "actor_name": "Sistema",
+        "user_id": "1202288"
+    },
+    {
+        "contract_id": 2,
+        "event_type": "created",
+        "title": "Contrato creado",
+        "description": "El contrato fue creado por Carlos Mendoza",
+        "actor_name": "Carlos Mendoza",
+        "user_id": "1202288"
+    },
+    {
+        "contract_id": 2,
+        "event_type": "signed",
+        "title": "Contrato firmado",
+        "description": "Todas las partes firmaron el contrato",
+        "actor_name": "Sebastián Muñoz",
+        "user_id": "1202288"
+    },
+    {
+        "contract_id": 2,
+        "event_type": "deposit_received",
+        "title": "Depósito recibido",
+        "description": "Se recibió el depósito de $2.400.000 CLP",
+        "actor_name": "Sistema",
+        "user_id": "1202288"
+    },
+    {
+        "contract_id": 2,
+        "event_type": "in_custody",
+        "title": "Depósito en custodia",
+        "description": "Los fondos están seguros en custodia digital",
+        "actor_name": "Sistema",
+        "user_id": "1202288"
+    },
+    {
+        "contract_id": 3,
+        "event_type": "created",
+        "title": "Contrato creado",
+        "description": "El contrato fue creado por Catalina Rojas",
+        "actor_name": "Catalina Rojas",
+        "user_id": "1202288"
+    },
+    {
+        "contract_id": 3,
+        "event_type": "signed",
+        "title": "Contrato firmado",
+        "description": "Todas las partes firmaron el contrato",
+        "actor_name": "María Fernanda López",
+        "user_id": "1202288"
+    },
+    {
+        "contract_id": 3,
+        "event_type": "deposit_received",
+        "title": "Depósito recibido",
+        "description": "Se recibió el depósito de $1.300.000 CLP",
+        "actor_name": "Sistema",
+        "user_id": "1202288"
+    },
+    {
+        "contract_id": 3,
+        "event_type": "in_custody",
+        "title": "Depósito en custodia",
+        "description": "Los fondos están seguros en custodia digital",
+        "actor_name": "Sistema",
+        "user_id": "1202288"
+    },
+    {
+        "contract_id": 3,
+        "event_type": "deduction_added",
+        "title": "Deducción agregada",
+        "description": "Se agregó una deducción por limpieza profunda",
+        "actor_name": "Catalina Rojas",
+        "user_id": "1202288"
+    },
+    {
+        "contract_id": 3,
+        "event_type": "return_approved",
+        "title": "Devolución aprobada",
+        "description": "La devolución fue aprobada por ambas partes",
+        "actor_name": "Sistema",
+        "user_id": "1202288"
+    }
+]

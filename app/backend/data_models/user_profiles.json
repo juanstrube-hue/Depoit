@@ -1,0 +1,40 @@
+{
+    "title": "user_profiles",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "integer",
+            "description": "Primary key, auto-increment"
+        },
+        "user_id": {
+            "type": "string",
+            "description": "User ID from auth"
+        },
+        "display_name": {
+            "type": "string",
+            "description": "User display name"
+        },
+        "roles": {
+            "type": "string",
+            "description": "Comma-separated roles: landlord,tenant,broker,admin"
+        },
+        "phone": {
+            "type": "string",
+            "description": "Phone number"
+        },
+        "rut": {
+            "type": "string",
+            "description": "Chilean RUT identifier"
+        },
+        "avatar_url": {
+            "type": "string",
+            "description": "Profile avatar URL"
+        }
+    },
+    "required": [
+        "id",
+        "user_id",
+        "display_name",
+        "roles"
+    ]
+}

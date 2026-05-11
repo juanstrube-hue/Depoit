@@ -1,0 +1,50 @@
+[
+    {
+        "title": "Contrato firmado",
+        "message": "María Fernanda López firmó el contrato para Av. Providencia 1234",
+        "type": "signature",
+        "is_read": true,
+        "contract_id": 1,
+        "user_id": "1202288"
+    },
+    {
+        "title": "Depósito recibido",
+        "message": "Se recibió el depósito de $1.700.000 para Av. Providencia 1234",
+        "type": "deposit",
+        "is_read": true,
+        "contract_id": 1,
+        "user_id": "1202288"
+    },
+    {
+        "title": "Nueva deducción",
+        "message": "Se agregó una deducción de $120.000 por limpieza en Calle Nueva de Lyon 890",
+        "type": "deduction",
+        "is_read": false,
+        "contract_id": 3,
+        "user_id": "1202288"
+    },
+    {
+        "title": "Devolución aprobada",
+        "message": "La devolución de $1.150.000 fue aprobada para Calle Nueva de Lyon 890",
+        "type": "return",
+        "is_read": false,
+        "contract_id": 3,
+        "user_id": "1202288"
+    },
+    {
+        "title": "Invitación recibida",
+        "message": "Carlos Mendoza te invitó al contrato de Av. Apoquindo 4500",
+        "type": "invitation",
+        "is_read": false,
+        "contract_id": 4,
+        "user_id": "1202288"
+    },
+    {
+        "title": "Pago completado",
+        "message": "Se completó la devolución de $1.960.000 para Av. Italia 1567",
+        "type": "payment",
+        "is_read": true,
+        "contract_id": 5,
+        "user_id": "1202288"
+    }
+]
