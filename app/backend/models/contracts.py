@@ -1,6 +1,6 @@
 from core.database import Base
 from datetime import datetime
-from sqlalchemy import Column, DateTime, Integer, String
+from sqlalchemy import Boolean, Column, DateTime, Integer, String
 
 
 class Contracts(Base):
@@ -24,6 +24,10 @@ class Contracts(Base):
     start_date = Column(String, nullable=True)
     end_date = Column(String, nullable=True)
     status = Column(String, nullable=False)
+    contract_status = Column(String, nullable=False)
+    deposit_status = Column(String, nullable=False)
+    signed_by_landlord = Column(Boolean, nullable=True)
+    signed_by_tenant = Column(Boolean, nullable=True)
     yield_generated = Column(Integer, nullable=True)
     signed_at = Column(String, nullable=True)
     deposit_received_at = Column(String, nullable=True)

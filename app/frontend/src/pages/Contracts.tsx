@@ -1,7 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { client } from '@/lib/api';
-import { formatCLP, formatDate, getStatusColor, getStatusLabel } from '@/lib/utils';
+import {
+  formatCLP,
+  formatDate,
+  getContractStatusLabel,
+  getContractStatusColor,
+  getContractStatusDot,
+  getDepositStatusLabel,
+  getDepositStatusColor,
+  getDepositStatusDot,
+} from '@/lib/utils';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -15,7 +24,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Search, FileText, MapPin, Calendar, Plus } from 'lucide-react';
-import type { Contract } from '@/types';
+import type { Contract, ContractStatus } from '@/types';
 
 export default function Contracts() {
   const navigate = useNavigate();
@@ -45,7 +54,7 @@ export default function Contracts() {
       c.property_address?.toLowerCase().includes(search.toLowerCase()) ||
       c.tenant_name?.toLowerCase().includes(search.toLowerCase()) ||
       c.landlord_name?.toLowerCase().includes(search.toLowerCase());
-    const matchesStatus = statusFilter === 'all' || c.status === statusFilter;
+    const matchesStatus = statusFilter === 'all' || c.contract_status === statusFilter;
     return matchesSearch && matchesStatus;
   });
 
@@ -78,16 +87,17 @@ export default function Contracts() {
           />
         </div>
         <Select value={statusFilter} onValueChange={setStatusFilter}>
-          <SelectTrigger className="w-full sm:w-44">
-            <SelectValue placeholder="Estado" />
+          <SelectTrigger className="w-full sm:w-52">
+            <SelectValue placeholder="Estado del contrato" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">Todos</SelectItem>
-            <SelectItem value="pending">Pendiente</SelectItem>
+            <SelectItem value="all">Todos los estados</SelectItem>
+            <SelectItem value="draft">Borrador</SelectItem>
+            <SelectItem value="pending_signatures">Pendiente de firmas</SelectItem>
+            <SelectItem value="signed">Firmado</SelectItem>
             <SelectItem value="active">Activo</SelectItem>
-            <SelectItem value="in_process">En Proceso</SelectItem>
-            <SelectItem value="completed">Completado</SelectItem>
-            <SelectItem value="rejected">Rechazado</SelectItem>
+            <SelectItem value="finished">Finalizado</SelectItem>
+            <SelectItem value="closed">Cerrado</SelectItem>
           </SelectContent>
         </Select>
       </div>
@@ -122,12 +132,17 @@ export default function Contracts() {
               <CardContent className="p-5">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <div className="space-y-2 flex-1">
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-3 flex-wrap">
                       <h3 className="font-semibold text-[#0F172A] group-hover:text-emerald-700 transition-colors">
                         {contract.property_address}
                       </h3>
-                      <Badge variant="outline" className={getStatusColor(contract.status)}>
-                        {getStatusLabel(contract.status)}
+                      <Badge variant="outline" className={getContractStatusColor(contract.contract_status)}>
+                        <span className={`inline-block w-1.5 h-1.5 rounded-full mr-1.5 ${getContractStatusDot(contract.contract_status)}`} />
+                        {getContractStatusLabel(contract.contract_status)}
+                      </Badge>
+                      <Badge variant="outline" className={getDepositStatusColor(contract.deposit_status)}>
+                        <span className={`inline-block w-1.5 h-1.5 rounded-full mr-1.5 ${getDepositStatusDot(contract.deposit_status)}`} />
+                        {getDepositStatusLabel(contract.deposit_status)}
                       </Badge>
                     </div>
                     <div className="flex flex-wrap items-center gap-4 text-sm text-[#64748B]">
@@ -154,7 +169,7 @@ export default function Contracts() {
                     <p className="text-lg font-bold text-[#0F172A]">
                       {formatCLP(contract.deposit_amount)}
                     </p>
-                    {contract.yield_generated > 0 && (
+                    {(contract.yield_generated || 0) > 0 && (
                       <p className="text-xs text-emerald-600 font-medium">
                         +{formatCLP(contract.yield_generated)} rendimiento
                       </p>

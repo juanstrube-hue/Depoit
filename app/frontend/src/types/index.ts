@@ -1,3 +1,6 @@
+export type ContractStatus = 'draft' | 'pending_signatures' | 'signed' | 'active' | 'finished' | 'closed';
+export type DepositStatus = 'pending_deposit' | 'deposited' | 'in_custody' | 'return_review' | 'partially_returned' | 'returned' | 'disputed';
+
 export interface UserProfile {
   id: number;
   user_id: string;
@@ -27,7 +30,11 @@ export interface Contract {
   deposit_amount: number;
   start_date: string;
   end_date: string;
-  status: 'pending' | 'active' | 'in_process' | 'completed' | 'rejected';
+  status: string;
+  contract_status: ContractStatus;
+  deposit_status: DepositStatus;
+  signed_by_landlord: boolean;
+  signed_by_tenant: boolean;
   yield_generated: number;
   signed_at: string;
   deposit_received_at: string;

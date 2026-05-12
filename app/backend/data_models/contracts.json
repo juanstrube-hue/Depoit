@@ -8,7 +8,7 @@
         },
         "user_id": {
             "type": "string",
-            "description": "Creator user ID"
+            "description": "User ID"
         },
         "landlord_name": {
             "type": "string",
@@ -36,19 +36,19 @@
         },
         "property_address": {
             "type": "string",
-            "description": "Full property address"
+            "description": "Property address"
         },
         "property_city": {
             "type": "string",
-            "description": "City/Commune"
+            "description": "Property city/comuna"
         },
         "property_region": {
             "type": "string",
-            "description": "Region"
+            "description": "Property region"
         },
         "property_type": {
             "type": "string",
-            "description": "apartment, house, office, commercial"
+            "description": "Property type"
         },
         "rent_amount": {
             "type": "integer",
@@ -56,7 +56,7 @@
         },
         "deposit_amount": {
             "type": "integer",
-            "description": "Security deposit in CLP"
+            "description": "Deposit amount in CLP"
         },
         "start_date": {
             "type": "string",
@@ -68,7 +68,23 @@
         },
         "status": {
             "type": "string",
-            "description": "draft, pending_signature, pending_payment, in_custody, in_return_process, completed, cancelled"
+            "description": "Legacy status field"
+        },
+        "contract_status": {
+            "type": "string",
+            "description": "Contract state machine: draft, pending_signatures, signed, active, finished, closed"
+        },
+        "deposit_status": {
+            "type": "string",
+            "description": "Deposit state machine: pending_deposit, deposited, in_custody, return_review, partially_returned, returned, disputed"
+        },
+        "signed_by_landlord": {
+            "type": "boolean",
+            "description": "Whether landlord has signed"
+        },
+        "signed_by_tenant": {
+            "type": "boolean",
+            "description": "Whether tenant has signed"
         },
         "yield_generated": {
             "type": "integer",
@@ -91,6 +107,8 @@
         "property_address",
         "rent_amount",
         "deposit_amount",
-        "status"
+        "status",
+        "contract_status",
+        "deposit_status"
     ]
 }

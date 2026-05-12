@@ -2,7 +2,16 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { client } from '@/lib/api';
-import { formatCLP, formatDate, getStatusColor, getStatusLabel } from '@/lib/utils';
+import {
+  formatCLP,
+  formatDate,
+  getContractStatusLabel,
+  getContractStatusColor,
+  getContractStatusDot,
+  getDepositStatusLabel,
+  getDepositStatusColor,
+  getDepositStatusDot,
+} from '@/lib/utils';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -23,6 +32,7 @@ import {
   ArrowRight,
   Shield,
   Plus,
+  PenTool,
 } from 'lucide-react';
 import type { Contract } from '@/types';
 
@@ -47,12 +57,14 @@ export default function Dashboard() {
     fetchData();
   }, []);
 
-  const totalDeposits = contracts.reduce((sum, c) => sum + (c.deposit_amount || 0), 0);
-  const activeContracts = contracts.filter((c) => c.status === 'active').length;
+  // Metrics based on new state machines
+  const inCustodyContracts = contracts.filter((c) => c.deposit_status === 'in_custody');
+  const totalInCustody = inCustodyContracts.reduce((sum, c) => sum + (c.deposit_amount || 0), 0);
+  const activeContracts = contracts.filter((c) => c.contract_status === 'active').length;
   const totalYield = contracts.reduce((sum, c) => sum + (c.yield_generated || 0), 0);
-  const pendingReturns = contracts.filter((c) => c.status === 'pending').length;
+  const pendingSignatures = contracts.filter((c) => c.contract_status === 'pending_signatures').length;
 
-  const roleGreeting = {
+  const roleGreeting: Record<string, string> = {
     arrendador: 'Resumen de tus propiedades',
     arrendatario: 'Resumen de tus arriendos',
     corredor: 'Resumen de contratos gestionados',
@@ -61,7 +73,7 @@ export default function Dashboard() {
   const metrics = [
     {
       title: 'Total en Custodia',
-      value: formatCLP(totalDeposits),
+      value: formatCLP(totalInCustody),
       icon: Wallet,
       color: 'text-emerald-600',
       bg: 'bg-emerald-50',
@@ -81,9 +93,9 @@ export default function Dashboard() {
       bg: 'bg-purple-50',
     },
     {
-      title: 'Devoluciones Pendientes',
-      value: pendingReturns.toString(),
-      icon: RotateCcw,
+      title: 'Pendientes de Firma',
+      value: pendingSignatures.toString(),
+      icon: PenTool,
       color: 'text-amber-600',
       bg: 'bg-amber-50',
     },
@@ -95,7 +107,7 @@ export default function Dashboard() {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-[#0F172A]">Dashboard</h1>
-          <p className="text-[#64748B] mt-1">{roleGreeting[currentRole]}</p>
+          <p className="text-[#64748B] mt-1">{roleGreeting[currentRole] || 'Resumen general'}</p>
         </div>
         <Button
           onClick={() => navigate('/contracts/new')}
@@ -181,8 +193,9 @@ export default function Dashboard() {
                     <TableHead>Propiedad</TableHead>
                     <TableHead>Arrendatario</TableHead>
                     <TableHead>Depósito</TableHead>
-                    <TableHead>Estado</TableHead>
-                    <TableHead>Fecha Inicio</TableHead>
+                    <TableHead>Contrato</TableHead>
+                    <TableHead>Depósito Estado</TableHead>
+                    <TableHead>Fecha</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -202,8 +215,15 @@ export default function Dashboard() {
                         {formatCLP(contract.deposit_amount)}
                       </TableCell>
                       <TableCell>
-                        <Badge variant="outline" className={getStatusColor(contract.status)}>
-                          {getStatusLabel(contract.status)}
+                        <Badge variant="outline" className={getContractStatusColor(contract.contract_status)}>
+                          <span className={`inline-block w-1.5 h-1.5 rounded-full mr-1.5 ${getContractStatusDot(contract.contract_status)}`} />
+                          {getContractStatusLabel(contract.contract_status)}
+                        </Badge>
+                      </TableCell>
+                      <TableCell>
+                        <Badge variant="outline" className={getDepositStatusColor(contract.deposit_status)}>
+                          <span className={`inline-block w-1.5 h-1.5 rounded-full mr-1.5 ${getDepositStatusDot(contract.deposit_status)}`} />
+                          {getDepositStatusLabel(contract.deposit_status)}
                         </Badge>
                       </TableCell>
                       <TableCell className="text-[#64748B]">

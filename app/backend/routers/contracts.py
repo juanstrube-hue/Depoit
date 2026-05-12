@@ -37,6 +37,10 @@ class ContractsData(BaseModel):
     start_date: str = None
     end_date: str = None
     status: str
+    contract_status: str
+    deposit_status: str
+    signed_by_landlord: bool = None
+    signed_by_tenant: bool = None
     yield_generated: int = None
     signed_at: str = None
     deposit_received_at: str = None
@@ -59,6 +63,10 @@ class ContractsUpdateData(BaseModel):
     start_date: Optional[str] = None
     end_date: Optional[str] = None
     status: Optional[str] = None
+    contract_status: Optional[str] = None
+    deposit_status: Optional[str] = None
+    signed_by_landlord: Optional[bool] = None
+    signed_by_tenant: Optional[bool] = None
     yield_generated: Optional[int] = None
     signed_at: Optional[str] = None
     deposit_received_at: Optional[str] = None
@@ -83,6 +91,10 @@ class ContractsResponse(BaseModel):
     start_date: Optional[str] = None
     end_date: Optional[str] = None
     status: str
+    contract_status: str
+    deposit_status: str
+    signed_by_landlord: Optional[bool] = None
+    signed_by_tenant: Optional[bool] = None
     yield_generated: Optional[int] = None
     signed_at: Optional[str] = None
     deposit_received_at: Optional[str] = None

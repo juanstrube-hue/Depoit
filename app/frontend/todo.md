@@ -12,19 +12,33 @@
 **Typography**: Inter font family, clean hierarchy
 **Key Component Styles**: Soft borders (rounded-xl), light shadows, large white spaces, modern cards with hover states, status badges with colored dots, premium fintech feel
 
+## Contract Lifecycle State Machines
+
+### Contract Status: draft → pending_signatures → signed → active → finished → closed
+### Deposit Status: pending_deposit → deposited → in_custody → return_review → partially_returned | returned | disputed
+
+### Valid Transitions (contract_status):
+- draft → pending_signatures (when creator submits)
+- pending_signatures → signed (when both parties sign)
+- signed → active (when deposit is received / in_custody)
+- active → finished (when contract end date reached or manual termination)
+- finished → closed (after deposit fully returned)
+
+### Valid Transitions (deposit_status):
+- pending_deposit → deposited (payment confirmed)
+- deposited → in_custody (funds verified in custody account)
+- in_custody → return_review (contract finished, return initiated)
+- return_review → returned (full return)
+- return_review → partially_returned (with deductions)
+- return_review → disputed (disagreement on deductions)
+
 ## Development Tasks
 
-- [x] Set up database tables
-- [x] Insert Chilean demo/mock data
-- [x] Create frontend auth flow with login page
-- [x] Build main layout with sidebar navigation
-- [x] Build Dashboard with metrics cards and contracts table
-- [x] Build Contract Detail page with tabs
-- [x] Build Deposit Returns flow page
-- [x] Build Notifications system
-- [x] Polish: Replace all English labels with Spanish, improve status badges with dot indicators
-- [x] Polish: Redesign role selector as premium segmented control in Layout sidebar
-- [x] Polish: Add "Crear contrato" CTA button to Dashboard and Contracts page
-- [x] Polish: Add trust perception elements (custody indicators, security badges, institutional feel)
-- [x] Polish: Design premium empty states for Wallet, Activity, Settings pages
-- [x] Build: Contract Creation 5-step wizard (Property → Participants → Financial → Signature → Payment)
+- [x] Set up database tables (contract_status, deposit_status, signed_by_landlord, signed_by_tenant added)
+- [x] Update TypeScript types to include new fields
+- [x] Update utils.ts with new status labels, colors, dots, and transition validation helpers
+- [x] Fix ContractNew.tsx to send contract_status='pending_signatures', deposit_status='pending_deposit', signed_by_landlord/tenant
+- [x] Rewrite ContractDetail.tsx as operational center: dual status display, action buttons per state, dynamic timeline
+- [x] Update Dashboard.tsx to use contract_status and deposit_status for metrics
+- [x] Update Contracts.tsx list to show dual statuses and filter by contract_status
+- [x] Lint and build verification

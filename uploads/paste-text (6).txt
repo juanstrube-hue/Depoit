@@ -1,0 +1,277 @@
+Entramos en una nueva fase del MVP.
+
+Ya no necesito más pantallas visuales aisladas.
+Ahora necesito comportamiento real y coherencia operacional.
+
+Objetivo:
+convertir el mockup navegable en un sistema funcional de flujo completo.
+
+# PRIORIDAD 1 — Contratos funcionales reales
+
+Actualmente:
+
+* el wizard no crea contratos realmente,
+* algunos pasos no permiten avanzar,
+* inputs pierden foco,
+* no existe persistencia,
+* los estados son solo visuales.
+
+Necesito implementar flujo real.
+
+---
+
+# 1. Crear contratos reales
+
+Cuando se completa el wizard:
+
+* debe crearse un contrato real en storage/database,
+* debe aparecer automáticamente en:
+
+  * Dashboard
+  * Contratos
+  * detalle de contrato
+
+Persistir:
+
+* propiedad
+* participantes
+* montos
+* fechas
+* tipo propiedad
+* estado contrato
+* estado garantía
+
+---
+
+# 2. Arreglar wizard
+
+Problemas actuales:
+
+* inputs pierden foco al escribir,
+* algunos pasos no permiten avanzar,
+* navegación inconsistente.
+
+Corregir:
+
+* controlled inputs
+* state management
+* validaciones
+* persistencia entre pasos
+
+IMPORTANTE:
+el flujo debe sentirse estable y profesional.
+
+---
+
+# 3. Implementar arquitectura REAL de estados
+
+Separar:
+
+contract.status
+deposit.status
+
+NO usar un solo estado combinado.
+
+---
+
+# Estados contrato
+
+draft
+pending_deposit
+pending_signatures
+active
+finished
+closed
+
+---
+
+# Estados garantía
+
+pending_deposit
+deposited
+in_custody
+return_review
+partially_returned
+returned
+disputed
+
+---
+
+# 4. Implementar acciones reales de transición
+
+Agregar acciones visibles en UI.
+
+Ejemplos:
+
+## Contrato pendiente depósito
+
+Botón:
+“Registrar depósito”
+
+Al ejecutarlo:
+deposit.status -> deposited
+
+---
+
+## Contrato depositado
+
+Botón:
+“Firmar contrato”
+
+Al ejecutarlo:
+contract.status -> pending_signatures
+
+---
+
+## Contrato firmado
+
+Botón:
+“Activar custodia”
+
+Al ejecutarlo:
+deposit.status -> in_custody
+contract.status -> active
+
+---
+
+# 5. Implementar timeline dinámico
+
+Actualmente el timeline es mock.
+
+Necesito:
+
+* eventos generados automáticamente,
+* según acciones reales,
+* ordenados cronológicamente.
+
+Ejemplos:
+
+* Contrato creado
+* Depósito registrado
+* Contrato firmado
+* Custodia activada
+* Descuento propuesto
+* Descuento aprobado
+
+---
+
+# 6. Implementar propuestas de descuentos
+
+Actualmente solo existe visualización.
+
+Necesito flujo real:
+
+## Crear propuesta:
+
+* motivo
+* monto
+* evidencia opcional
+
+## Contraparte:
+
+* aprobar
+* rechazar
+
+Si rechaza:
+estado:
+“En revisión”
+
+Mostrar propuestas:
+
+* en detalle contrato,
+* timeline,
+* resumen financiero.
+
+---
+
+# 7. Corregir estados y data mock
+
+Actualmente existen inconsistencias:
+
+* contratos pendientes firma con depósito activo,
+* estados incompatibles,
+* timeline incoherente.
+
+Corregir toda la data demo.
+
+---
+
+# 8. Login real Google OAuth
+
+Implementar:
+
+* Google login
+* sesión persistente
+* nombre/avatar reales
+
+NO usar autenticación Base44 temporal.
+
+---
+
+# 9. Modelo de roles MVP
+
+Roles:
+
+* landlord
+* tenant
+* broker
+
+MVP:
+
+* un solo rol principal por cuenta.
+
+Tenant:
+solo entra mediante invitación.
+
+---
+
+# 10. Firma electrónica
+
+Preparar arquitectura para:
+
+## Firma electrónica simple (gratis)
+
+## Firma electrónica avanzada (pago CLP 1.000)
+
+NO integrar proveedor aún.
+
+Solo:
+
+* flujo UX,
+* selección de tipo firma,
+* placeholders,
+* estados.
+
+---
+
+# 11. Mejorar navegación contrato
+
+En detalle contrato:
+
+* separar claramente:
+
+  * estado contrato
+  * estado garantía
+
+Agregar:
+
+* CTAs contextuales
+* acciones disponibles
+* badges más claros
+
+---
+
+# 12. Objetivo de este sprint
+
+Quiero que:
+
+* pueda crear contrato,
+* avanzar estados,
+* generar eventos,
+* proponer descuentos,
+* aprobar/rechazar,
+* ver persistencia real,
+* navegar contratos funcionalmente.
+
+Ya no necesito solo UI.
+Necesito comportamiento real.

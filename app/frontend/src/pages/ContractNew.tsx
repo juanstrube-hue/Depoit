@@ -746,7 +746,8 @@ export default function ContractNew() {
   const handleSubmit = async () => {
     try {
       setSubmitting(true);
-      await client.entities.contracts.create({
+      const now = new Date().toISOString();
+      const res = await client.entities.contracts.create({
         data: {
           landlord_name: form.landlord_name,
           landlord_email: form.landlord_email,
@@ -762,12 +763,42 @@ export default function ContractNew() {
           deposit_amount: parseInt(form.deposit_amount) || 0,
           start_date: form.start_date,
           end_date: form.end_date,
-          status: 'active',
+          status: 'pending_signatures',
+          contract_status: 'pending_signatures',
+          deposit_status: 'pending_deposit',
+          signed_by_landlord: signed,
+          signed_by_tenant: false,
           yield_generated: 0,
-          signed_at: new Date().toISOString(),
-          deposit_received_at: new Date().toISOString(),
+          signed_at: signed ? now : '',
+          deposit_received_at: '',
         },
       });
+
+      // Create initial timeline event
+      const contractId = res?.data?.id;
+      if (contractId) {
+        await client.entities.contract_events.create({
+          data: {
+            contract_id: contractId,
+            event_type: 'contract_created',
+            title: 'Contrato creado',
+            description: `Contrato creado para ${form.property_address}. Pendiente de firmas de ambas partes.`,
+            actor_name: user?.email || 'Sistema',
+          },
+        });
+        if (signed) {
+          await client.entities.contract_events.create({
+            data: {
+              contract_id: contractId,
+              event_type: 'landlord_signed',
+              title: 'Firma del arrendador',
+              description: `${form.landlord_name} firmó el contrato digitalmente.`,
+              actor_name: form.landlord_name,
+            },
+          });
+        }
+      }
+
       setCompleted(true);
     } catch (err) {
       console.error('Error creating contract:', err);
