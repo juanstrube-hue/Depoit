@@ -1,0 +1,56 @@
+Please improve the current Depoit application with a focus on product polish, trust perception, and onboarding flow quality.
+IMPORTANT: Do not add generic admin-style UI.
+The app should feel like:
+a premium fintech product,
+trustworthy,
+emotionally reassuring,
+modern,
+calm,
+investor-ready.
+First Fix Existing Issues
+Replace ALL remaining English labels/statuses with proper Spanish:
+pending_signature → Pendiente de firma
+paid → Pagado
+landlord → Arrendador
+tenant → Arrendatario
+etc.
+Improve empty states: Wallet, Activity and Settings currently feel unfinished and empty. Design proper premium empty states with:
+icons,
+explanatory text,
+onboarding guidance,
+soft fintech styling.
+Add primary CTA buttons: Add a visible “Crear contrato” button in the main dashboard and contracts section.
+Improve trust perception: Add visual trust elements such as:
+“Fondos en custodia”
+“Protección de depósitos”
+secure custody indicators
+audit/timeline references
+institutional fintech feel
+Improve status badges: Make all statuses visually polished and consistent.
+Improve role selector UI: The current dropdown feels too generic. Redesign it with a more premium segmented-control or fintech-style selector.
+Then Build the Contract Creation Wizard
+Create a polished multi-step contract creation flow with:
+Property information
+Participants
+Financial terms
+Digital signature simulation
+Deposit payment simulation
+Requirements:
+modern stepper UI,
+smooth transitions,
+premium onboarding feel,
+clean forms,
+CLP formatting,
+Chilean addresses,
+emotionally reassuring language.
+The contract creation flow should feel like opening a financial account at a premium fintech company.
+Prioritize:
+UX quality,
+trust,
+simplicity,
+polish,
+visual hierarchy.
+Avoid:
+enterprise UI,
+generic CRUD forms,
+bootstrap-style layouts.

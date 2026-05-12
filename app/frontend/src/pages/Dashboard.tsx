@@ -21,6 +21,8 @@ import {
   TrendingUp,
   RotateCcw,
   ArrowRight,
+  Shield,
+  Plus,
 } from 'lucide-react';
 import type { Contract } from '@/types';
 
@@ -90,9 +92,33 @@ export default function Dashboard() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div>
-        <h1 className="text-2xl font-bold text-[#0F172A]">Dashboard</h1>
-        <p className="text-[#64748B] mt-1">{roleGreeting[currentRole]}</p>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold text-[#0F172A]">Dashboard</h1>
+          <p className="text-[#64748B] mt-1">{roleGreeting[currentRole]}</p>
+        </div>
+        <Button
+          onClick={() => navigate('/contracts/new')}
+          className="bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm"
+        >
+          <Plus className="h-4 w-4 mr-2" />
+          Crear contrato
+        </Button>
+      </div>
+
+      {/* Trust Banner */}
+      <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-emerald-50 border border-emerald-100">
+        <div className="flex-shrink-0 p-2 bg-emerald-100 rounded-full">
+          <Shield className="h-5 w-5 text-emerald-600" />
+        </div>
+        <div>
+          <p className="text-sm font-medium text-emerald-800">
+            Tus fondos están protegidos en custodia segura
+          </p>
+          <p className="text-xs text-emerald-600 mt-0.5">
+            Depósitos resguardados con los más altos estándares de seguridad financiera
+          </p>
+        </div>
       </div>
 
       {/* Metrics */}

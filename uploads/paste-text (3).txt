@@ -1,0 +1,55 @@
+Continue exactly where the previous implementation stopped.
+
+Complete the remaining UX polish tasks from the todo list.
+
+Specifically:
+
+1. Create premium empty states for:
+
+* Wallet
+* Activity
+* Settings
+
+These pages should NOT feel unfinished.
+
+Requirements:
+
+* premium fintech aesthetic,
+* calm and trustworthy design,
+* onboarding-oriented messaging,
+* subtle icons/illustrations,
+* explanatory copy,
+* soft gradients or light card sections,
+* guidance about future functionality.
+
+2. Add consistent loading skeletons where appropriate.
+
+3. Improve mobile spacing and responsive behavior across all pages.
+
+4. Review visual consistency:
+
+* spacing,
+* typography,
+* card shadows,
+* status badges,
+* button hierarchy,
+* border radius consistency.
+
+5. Verify all pages feel cohesive and polished.
+
+IMPORTANT:
+Do not add random new features.
+Focus only on polish, consistency, UX quality, and trust perception.
+
+The app should feel like:
+
+* Stripe,
+* Mercury,
+* Linear,
+* modern fintech onboarding.
+
+After changes:
+
+* run lint,
+* run build,
+* verify the UI renders correctly.

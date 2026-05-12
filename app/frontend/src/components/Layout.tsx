@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -10,13 +9,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import {
   LayoutDashboard,
   FileText,
@@ -29,6 +21,9 @@ import {
   Menu,
   X,
   Shield,
+  Building2,
+  User,
+  Briefcase,
 } from 'lucide-react';
 import type { UserRole } from '@/types';
 
@@ -39,6 +34,12 @@ const navigation = [
   { name: 'Billetera', href: '/wallet', icon: Wallet },
   { name: 'Actividad', href: '/activity', icon: Activity },
   { name: 'Configuración', href: '/settings', icon: Settings },
+];
+
+const roleConfig: { value: UserRole; label: string; icon: React.ElementType }[] = [
+  { value: 'arrendador', label: 'Arrendador', icon: Building2 },
+  { value: 'arrendatario', label: 'Arrendatario', icon: User },
+  { value: 'corredor', label: 'Corredor', icon: Briefcase },
 ];
 
 const roleLabels: Record<UserRole, string> = {
@@ -74,34 +75,47 @@ export default function Layout({ children }: LayoutProps) {
         }`}
       >
         {/* Logo */}
-        <div className="h-16 flex items-center px-6 border-b border-[#E2E8F0]">
-          <Link to="/dashboard" className="flex items-center gap-2">
-            <Shield className="h-7 w-7 text-emerald-500" />
-            <span className="text-xl font-bold text-[#0F172A]">Depoit</span>
-          </Link>
-          <button
-            className="ml-auto lg:hidden"
-            onClick={() => setSidebarOpen(false)}
-          >
-            <X className="h-5 w-5 text-gray-500" />
-          </button>
+        <div className="h-16 flex flex-col justify-center px-6 border-b border-[#E2E8F0]">
+          <div className="flex items-center justify-between">
+            <Link to="/dashboard" className="flex items-center gap-2">
+              <Shield className="h-7 w-7 text-emerald-500" />
+              <span className="text-xl font-bold text-[#0F172A]">Depoit</span>
+            </Link>
+            <button
+              className="lg:hidden"
+              onClick={() => setSidebarOpen(false)}
+            >
+              <X className="h-5 w-5 text-gray-500" />
+            </button>
+          </div>
+          <p className="text-xs text-gray-400 mt-1 pl-9">Custodia segura de depósitos</p>
         </div>
 
-        {/* Role Selector */}
+        {/* Role Selector - Segmented Control */}
         <div className="px-4 py-4 border-b border-[#E2E8F0]">
-          <label className="text-xs font-medium text-[#64748B] mb-1.5 block">
+          <label className="text-xs font-medium text-[#64748B] mb-2 block">
             Rol activo
           </label>
-          <Select value={currentRole} onValueChange={(v) => setCurrentRole(v as UserRole)}>
-            <SelectTrigger className="w-full h-9 text-sm">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="arrendador">Arrendador</SelectItem>
-              <SelectItem value="arrendatario">Arrendatario</SelectItem>
-              <SelectItem value="corredor">Corredor</SelectItem>
-            </SelectContent>
-          </Select>
+          <div className="flex rounded-lg border border-gray-200 bg-gray-50 p-0.5">
+            {roleConfig.map((role) => {
+              const isActive = currentRole === role.value;
+              const RoleIcon = role.icon;
+              return (
+                <button
+                  key={role.value}
+                  onClick={() => setCurrentRole(role.value)}
+                  className={`flex-1 flex items-center justify-center gap-1.5 px-2 py-2 rounded-md text-xs font-medium transition-all ${
+                    isActive
+                      ? 'bg-emerald-50 text-emerald-700 border border-emerald-200 shadow-sm'
+                      : 'text-gray-500 hover:bg-gray-100 border border-transparent'
+                  }`}
+                >
+                  <RoleIcon className="h-3.5 w-3.5" />
+                  <span className="hidden xl:inline">{role.label}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* Navigation */}

@@ -12,6 +12,9 @@ import Contracts from './pages/Contracts';
 import ContractDetail from './pages/ContractDetail';
 import Returns from './pages/Returns';
 import Notifications from './pages/Notifications';
+import Wallet from './pages/Wallet';
+import ActivityPage from './pages/ActivityPage';
+import SettingsPage from './pages/SettingsPage';
 import Layout from './components/Layout';
 import { useAuth } from './contexts/AuthContext';
 
@@ -88,10 +91,7 @@ const AppRoutes = () => (
       path="/wallet"
       element={
         <ProtectedRoute>
-          <div className="text-center py-16">
-            <p className="text-2xl font-bold text-[#0F172A]">Billetera</p>
-            <p className="text-[#64748B] mt-2">Próximamente</p>
-          </div>
+          <Wallet />
         </ProtectedRoute>
       }
     />
@@ -99,10 +99,7 @@ const AppRoutes = () => (
       path="/activity"
       element={
         <ProtectedRoute>
-          <div className="text-center py-16">
-            <p className="text-2xl font-bold text-[#0F172A]">Actividad</p>
-            <p className="text-[#64748B] mt-2">Próximamente</p>
-          </div>
+          <ActivityPage />
         </ProtectedRoute>
       }
     />
@@ -110,10 +107,7 @@ const AppRoutes = () => (
       path="/settings"
       element={
         <ProtectedRoute>
-          <div className="text-center py-16">
-            <p className="text-2xl font-bold text-[#0F172A]">Configuración</p>
-            <p className="text-[#64748B] mt-2">Próximamente</p>
-          </div>
+          <SettingsPage />
         </ProtectedRoute>
       }
     />

@@ -14,7 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Search, FileText, MapPin, Calendar } from 'lucide-react';
+import { Search, FileText, MapPin, Calendar, Plus } from 'lucide-react';
 import type { Contract } from '@/types';
 
 export default function Contracts() {
@@ -57,6 +57,13 @@ export default function Contracts() {
           <h1 className="text-2xl font-bold text-[#0F172A]">Contratos</h1>
           <p className="text-[#64748B] mt-1">Gestiona todos tus contratos de arriendo</p>
         </div>
+        <Button
+          onClick={() => navigate('/contracts/new')}
+          className="bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm"
+        >
+          <Plus className="h-4 w-4 mr-2" />
+          Crear contrato
+        </Button>
       </div>
 
       {/* Filters */}
