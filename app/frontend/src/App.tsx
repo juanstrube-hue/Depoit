@@ -15,6 +15,7 @@ import Notifications from './pages/Notifications';
 import Wallet from './pages/Wallet';
 import ActivityPage from './pages/ActivityPage';
 import SettingsPage from './pages/SettingsPage';
+import ContractNew from './pages/ContractNew';
 import Layout from './components/Layout';
 import { useAuth } from './contexts/AuthContext';
 
@@ -60,6 +61,14 @@ const AppRoutes = () => (
       element={
         <ProtectedRoute>
           <Contracts />
+        </ProtectedRoute>
+      }
+    />
+    <Route
+      path="/contracts/new"
+      element={
+        <ProtectedRoute>
+          <ContractNew />
         </ProtectedRoute>
       }
     />

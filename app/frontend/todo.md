@@ -27,4 +27,4 @@
 - [x] Polish: Add "Crear contrato" CTA button to Dashboard and Contracts page
 - [x] Polish: Add trust perception elements (custody indicators, security badges, institutional feel)
 - [x] Polish: Design premium empty states for Wallet, Activity, Settings pages
-- [ ] Build: Contract Creation 5-step wizard (Property → Participants → Financial → Signature → Payment)
+- [x] Build: Contract Creation 5-step wizard (Property → Participants → Financial → Signature → Payment)

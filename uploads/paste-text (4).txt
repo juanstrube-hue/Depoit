@@ -1,0 +1,113 @@
+Create a premium multi-step Contract Creation flow for Depoit.
+
+This is the MOST IMPORTANT flow in the product.
+
+The experience should feel like:
+
+* opening a premium financial account,
+* calm,
+* trustworthy,
+* guided,
+* emotionally reassuring,
+* simple and elegant.
+
+Avoid:
+
+* enterprise forms,
+* ERP-style UI,
+* long boring forms,
+* generic CRUD layouts.
+
+# Flow Structure
+
+Step 1 — Property
+
+* Property address
+* Commune
+* Region
+* Property type
+
+Step 2 — Participants
+
+* Landlord
+* Tenant
+* Optional broker
+* Invitation by email
+
+Step 3 — Financial Terms
+
+* Monthly rent
+* Deposit amount
+* Contract dates
+* CLP formatting
+
+Step 4 — Digital Signature
+
+* Simulated signature experience
+* Trust-oriented language
+* Legal/security messaging
+
+Step 5 — Deposit Custody
+
+* Payment simulation
+* Deposit received state
+* Secure custody confirmation
+* Success experience
+
+# UX Requirements
+
+Use:
+
+* premium stepper,
+* smooth transitions,
+* progress indicators,
+* large spacing,
+* calm typography,
+* clear hierarchy,
+* modern cards,
+* subtle animations,
+* onboarding-focused language.
+
+# Important
+
+Each step should:
+
+* feel lightweight,
+* reduce anxiety,
+* guide the user clearly,
+* explain why information is needed.
+
+# Trust Layer
+
+Throughout the wizard include:
+
+* security messaging,
+* custody protection messaging,
+* transparency messaging,
+* traceability reassurance.
+
+# Final Success Screen
+
+The completion state should feel emotionally rewarding and trustworthy.
+
+Include:
+
+* contract created confirmation,
+* custody activated,
+* next steps,
+* timeline preview,
+* participant invitations sent.
+
+The overall experience should feel comparable to:
+
+* Stripe onboarding,
+* Mercury account opening,
+* Airbnb host onboarding.
+
+Prioritize:
+
+* emotional trust,
+* clarity,
+* elegance,
+* simplicity,
+* perceived professionalism.
