@@ -34,6 +34,10 @@ export function getStatusColor(status: string): string {
       return 'bg-emerald-100 text-emerald-800 border-emerald-200';
     case 'in_process':
       return 'bg-blue-100 text-blue-800 border-blue-200';
+    case 'in_custody':
+      return 'bg-teal-100 text-teal-800 border-teal-200';
+    case 'in_return_process':
+      return 'bg-indigo-100 text-indigo-800 border-indigo-200';
     case 'completed':
       return 'bg-gray-100 text-gray-800 border-gray-200';
     case 'rejected':
@@ -65,6 +69,10 @@ export function getStatusLabel(status: string): string {
       return 'Activo';
     case 'in_process':
       return 'En Proceso';
+    case 'in_custody':
+      return 'En custodia';
+    case 'in_return_process':
+      return 'En devolución';
     case 'completed':
       return 'Completado';
     case 'rejected':
@@ -81,6 +89,10 @@ export function getStatusLabel(status: string): string {
       return 'Cancelado';
     case 'partial':
       return 'Parcial';
+    case 'tenant':
+      return 'Arrendatario';
+    case 'landlord':
+      return 'Arrendador';
     default:
       return status;
   }
@@ -96,6 +108,10 @@ export function getStatusDot(status: string): string {
       return 'bg-emerald-400';
     case 'in_process':
       return 'bg-blue-400';
+    case 'in_custody':
+      return 'bg-teal-400';
+    case 'in_return_process':
+      return 'bg-indigo-400';
     case 'completed':
       return 'bg-gray-400';
     case 'rejected':

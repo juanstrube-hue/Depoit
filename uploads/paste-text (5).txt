@@ -1,0 +1,124 @@
+We are now entering the refinement and product-quality phase.
+
+Focus ONLY on polish, UX correctness, consistency, responsiveness, and interaction quality.
+
+Do NOT add new major features.
+
+# CRITICAL BUG FIXES
+
+1. Fix the form focus bug in Contract Creation.
+   Currently when typing in inputs (address, commune, etc), the input loses focus after one character.
+
+This is a critical UX issue.
+Likely caused by:
+
+* component re-renders,
+* unstable keys,
+* recreated state,
+* inline component definitions.
+
+The typing experience must feel smooth and native.
+
+# RESPONSIVENESS
+
+2. Improve responsive behavior and zoom handling.
+
+Current issues:
+
+* sidebar/menu visibility breaks at different browser zoom levels,
+* active role selector becomes visually broken when zooming out,
+* layout spacing becomes inconsistent.
+
+Requirements:
+
+* maintain stable layout from 75% to 125% zoom,
+* avoid overlapping UI,
+* keep sidebar behavior intentional,
+* improve responsive collapse logic.
+
+# LANGUAGE CONSISTENCY
+
+3. Standardize ALL product language to Spanish.
+
+Remove mixed-language states and labels like:
+
+* in_custody
+* in_return_process
+* tenant
+* landlord
+* etc.
+
+Use premium, human Spanish wording throughout the product.
+
+Examples:
+
+* “En custodia”
+* “En devolución”
+* “Arrendador”
+* “Arrendatario”
+
+# RETURN FLOW CLARITY
+
+4. Improve the return/refund cards.
+
+Current issue:
+“Monto a devolver” is ambiguous.
+
+Clarify:
+
+* original deposit,
+* descuentos aplicados,
+* monto final a devolver.
+
+Replace “deducciones” with:
+
+* “Descuentos”
+  throughout the entire product.
+
+The financial breakdown should feel transparent and reassuring.
+
+# CONFIGURATION PAGE
+
+5. Improve the Configuration page.
+
+Current issue:
+everything says “Próximamente”, which makes the app feel fake.
+
+Instead:
+
+* make cards clickable,
+* allow opening modal previews,
+* add realistic empty states,
+* create believable inactive states.
+
+The product should feel alive even before backend integration.
+
+# GENERAL PRODUCT QUALITY
+
+6. Focus on:
+
+* microinteractions,
+* hover states,
+* transitions,
+* spacing consistency,
+* visual hierarchy,
+* cursor behavior,
+* accessibility,
+* smoothness,
+* premium fintech feel.
+
+Avoid:
+
+* placeholder feeling,
+* template feeling,
+* unfinished states,
+* broken interaction patterns.
+
+The experience should now feel:
+
+* stable,
+* trustworthy,
+* intentional,
+* production-quality.
+
+Prioritize product quality over new features.

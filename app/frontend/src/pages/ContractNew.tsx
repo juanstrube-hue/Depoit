@@ -62,6 +62,22 @@ interface FormData {
   end_date: string;
 }
 
+interface StepProps {
+  form: FormData;
+  updateField: (field: keyof FormData, value: string) => void;
+}
+
+interface SignatureStepProps extends StepProps {
+  signed: boolean;
+  setSigned: (v: boolean) => void;
+  userEmail: string;
+}
+
+interface StepperProps {
+  currentStep: number;
+  completed: boolean;
+}
+
 const initialFormData: FormData = {
   property_address: '',
   property_city: '',
@@ -118,83 +134,22 @@ const propertyTypes = [
 ];
 
 /* ------------------------------------------------------------------ */
-/*  Component                                                          */
+/*  TrustBadge (extracted)                                             */
 /* ------------------------------------------------------------------ */
-export default function ContractNew() {
-  const navigate = useNavigate();
-  const { user } = useAuth();
-  const [currentStep, setCurrentStep] = useState(1);
-  const [form, setForm] = useState<FormData>(initialFormData);
-  const [signed, setSigned] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const [completed, setCompleted] = useState(false);
+function TrustBadge({ text }: { text: string }) {
+  return (
+    <div className="flex items-center gap-2 text-xs text-emerald-600 mt-4">
+      <Lock className="h-3.5 w-3.5" />
+      <span>{text}</span>
+    </div>
+  );
+}
 
-  const updateField = (field: keyof FormData, value: string) => {
-    setForm((prev) => ({ ...prev, [field]: value }));
-  };
-
-  const canProceed = (): boolean => {
-    switch (currentStep) {
-      case 1:
-        return !!(form.property_address && form.property_city && form.property_region && form.property_type);
-      case 2:
-        return !!(form.landlord_name && form.landlord_email && form.tenant_name && form.tenant_email);
-      case 3:
-        return !!(form.rent_amount && form.deposit_amount && form.start_date && form.end_date);
-      case 4:
-        return signed;
-      default:
-        return true;
-    }
-  };
-
-  const handleNext = () => {
-    if (currentStep < 5) {
-      setCurrentStep((s) => s + 1);
-    }
-  };
-
-  const handleBack = () => {
-    if (currentStep > 1) {
-      setCurrentStep((s) => s - 1);
-    }
-  };
-
-  const handleSubmit = async () => {
-    try {
-      setSubmitting(true);
-      await client.entities.contracts.create({
-        landlord_name: form.landlord_name,
-        landlord_email: form.landlord_email,
-        tenant_name: form.tenant_name,
-        tenant_email: form.tenant_email,
-        broker_name: form.broker_name || '',
-        broker_email: form.broker_email || '',
-        property_address: form.property_address,
-        property_city: form.property_city,
-        property_region: form.property_region,
-        property_type: form.property_type,
-        rent_amount: parseInt(form.rent_amount) || 0,
-        deposit_amount: parseInt(form.deposit_amount) || 0,
-        start_date: form.start_date,
-        end_date: form.end_date,
-        status: 'active',
-        yield_generated: 0,
-        signed_at: new Date().toISOString(),
-        deposit_received_at: new Date().toISOString(),
-      });
-      setCompleted(true);
-    } catch (err) {
-      console.error('Error creating contract:', err);
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
-  /* ---------------------------------------------------------------- */
-  /*  Stepper                                                          */
-  /* ---------------------------------------------------------------- */
-  const Stepper = () => (
+/* ------------------------------------------------------------------ */
+/*  Stepper (extracted)                                                */
+/* ------------------------------------------------------------------ */
+function Stepper({ currentStep, completed }: StepperProps) {
+  return (
     <div className="flex items-center justify-center gap-1 sm:gap-2 mb-8">
       {steps.map((step, index) => {
         const isActive = step.id === currentStep;
@@ -237,21 +192,13 @@ export default function ContractNew() {
       })}
     </div>
   );
+}
 
-  /* ---------------------------------------------------------------- */
-  /*  Trust badge                                                      */
-  /* ---------------------------------------------------------------- */
-  const TrustBadge = ({ text }: { text: string }) => (
-    <div className="flex items-center gap-2 text-xs text-emerald-600 mt-4">
-      <Lock className="h-3.5 w-3.5" />
-      <span>{text}</span>
-    </div>
-  );
-
-  /* ---------------------------------------------------------------- */
-  /*  Step 1 — Property                                                */
-  /* ---------------------------------------------------------------- */
-  const StepProperty = () => (
+/* ------------------------------------------------------------------ */
+/*  Step 1 — Property (extracted)                                      */
+/* ------------------------------------------------------------------ */
+function StepProperty({ form, updateField }: StepProps) {
+  return (
     <div className="space-y-6">
       <div className="text-center mb-8">
         <div className="mx-auto w-14 h-14 rounded-2xl bg-emerald-50 flex items-center justify-center mb-4">
@@ -317,11 +264,13 @@ export default function ContractNew() {
       <TrustBadge text="La información de la propiedad se almacena de forma segura y encriptada." />
     </div>
   );
+}
 
-  /* ---------------------------------------------------------------- */
-  /*  Step 2 — Participants                                            */
-  /* ---------------------------------------------------------------- */
-  const StepParticipants = () => (
+/* ------------------------------------------------------------------ */
+/*  Step 2 — Participants (extracted)                                   */
+/* ------------------------------------------------------------------ */
+function StepParticipants({ form, updateField }: StepProps) {
+  return (
     <div className="space-y-6">
       <div className="text-center mb-8">
         <div className="mx-auto w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center mb-4">
@@ -458,11 +407,13 @@ export default function ContractNew() {
       <TrustBadge text="Las invitaciones se envían de forma segura. Solo las partes autorizadas tendrán acceso." />
     </div>
   );
+}
 
-  /* ---------------------------------------------------------------- */
-  /*  Step 3 — Financial                                               */
-  /* ---------------------------------------------------------------- */
-  const StepFinancial = () => (
+/* ------------------------------------------------------------------ */
+/*  Step 3 — Financial (extracted)                                     */
+/* ------------------------------------------------------------------ */
+function StepFinancial({ form, updateField }: StepProps) {
+  return (
     <div className="space-y-6">
       <div className="text-center mb-8">
         <div className="mx-auto w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center mb-4">
@@ -554,11 +505,13 @@ export default function ContractNew() {
       <TrustBadge text="Los montos se registran en CLP. El depósito será custodiado de forma segura." />
     </div>
   );
+}
 
-  /* ---------------------------------------------------------------- */
-  /*  Step 4 — Signature                                               */
-  /* ---------------------------------------------------------------- */
-  const StepSignature = () => (
+/* ------------------------------------------------------------------ */
+/*  Step 4 — Signature (extracted)                                     */
+/* ------------------------------------------------------------------ */
+function StepSignature({ form, signed, setSigned, userEmail }: SignatureStepProps) {
+  return (
     <div className="space-y-6">
       <div className="text-center mb-8">
         <div className="mx-auto w-14 h-14 rounded-2xl bg-indigo-50 flex items-center justify-center mb-4">
@@ -627,7 +580,7 @@ export default function ContractNew() {
                 <div>
                   <p className="font-semibold text-emerald-700">Firma confirmada</p>
                   <p className="text-sm text-[#64748B] mt-1">
-                    Firmado por {user?.email || 'usuario'} · {new Date().toLocaleDateString('es-CL')}
+                    Firmado por {userEmail || 'usuario'} · {new Date().toLocaleDateString('es-CL')}
                   </p>
                 </div>
               </div>
@@ -667,11 +620,13 @@ export default function ContractNew() {
       <TrustBadge text="Firma protegida con encriptación de nivel bancario. Trazabilidad completa." />
     </div>
   );
+}
 
-  /* ---------------------------------------------------------------- */
-  /*  Step 5 — Custody                                                 */
-  /* ---------------------------------------------------------------- */
-  const StepCustody = () => (
+/* ------------------------------------------------------------------ */
+/*  Step 5 — Custody (extracted)                                       */
+/* ------------------------------------------------------------------ */
+function StepCustody({ form }: StepProps) {
+  return (
     <div className="space-y-6">
       <div className="text-center mb-8">
         <div className="mx-auto w-14 h-14 rounded-2xl bg-emerald-50 flex items-center justify-center mb-4">
@@ -743,6 +698,81 @@ export default function ContractNew() {
       <TrustBadge text="El depósito queda protegido desde el momento de la transferencia." />
     </div>
   );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Main Component                                                     */
+/* ------------------------------------------------------------------ */
+export default function ContractNew() {
+  const navigate = useNavigate();
+  const { user } = useAuth();
+  const [currentStep, setCurrentStep] = useState(1);
+  const [form, setForm] = useState<FormData>(initialFormData);
+  const [signed, setSigned] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [completed, setCompleted] = useState(false);
+
+  const updateField = (field: keyof FormData, value: string) => {
+    setForm((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const canProceed = (): boolean => {
+    switch (currentStep) {
+      case 1:
+        return !!(form.property_address && form.property_city && form.property_region && form.property_type);
+      case 2:
+        return !!(form.landlord_name && form.landlord_email && form.tenant_name && form.tenant_email);
+      case 3:
+        return !!(form.rent_amount && form.deposit_amount && form.start_date && form.end_date);
+      case 4:
+        return signed;
+      default:
+        return true;
+    }
+  };
+
+  const handleNext = () => {
+    if (currentStep < 5) {
+      setCurrentStep((s) => s + 1);
+    }
+  };
+
+  const handleBack = () => {
+    if (currentStep > 1) {
+      setCurrentStep((s) => s - 1);
+    }
+  };
+
+  const handleSubmit = async () => {
+    try {
+      setSubmitting(true);
+      await client.entities.contracts.create({
+        landlord_name: form.landlord_name,
+        landlord_email: form.landlord_email,
+        tenant_name: form.tenant_name,
+        tenant_email: form.tenant_email,
+        broker_name: form.broker_name || '',
+        broker_email: form.broker_email || '',
+        property_address: form.property_address,
+        property_city: form.property_city,
+        property_region: form.property_region,
+        property_type: form.property_type,
+        rent_amount: parseInt(form.rent_amount) || 0,
+        deposit_amount: parseInt(form.deposit_amount) || 0,
+        start_date: form.start_date,
+        end_date: form.end_date,
+        status: 'active',
+        yield_generated: 0,
+        signed_at: new Date().toISOString(),
+        deposit_received_at: new Date().toISOString(),
+      });
+      setCompleted(true);
+    } catch (err) {
+      console.error('Error creating contract:', err);
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   /* ---------------------------------------------------------------- */
   /*  Success screen                                                   */
@@ -830,11 +860,11 @@ export default function ContractNew() {
   /* ---------------------------------------------------------------- */
   const renderStep = () => {
     switch (currentStep) {
-      case 1: return <StepProperty />;
-      case 2: return <StepParticipants />;
-      case 3: return <StepFinancial />;
-      case 4: return <StepSignature />;
-      case 5: return <StepCustody />;
+      case 1: return <StepProperty form={form} updateField={updateField} />;
+      case 2: return <StepParticipants form={form} updateField={updateField} />;
+      case 3: return <StepFinancial form={form} updateField={updateField} />;
+      case 4: return <StepSignature form={form} updateField={updateField} signed={signed} setSigned={setSigned} userEmail={user?.email || ''} />;
+      case 5: return <StepCustody form={form} updateField={updateField} />;
       default: return null;
     }
   };
@@ -859,7 +889,7 @@ export default function ContractNew() {
       </div>
 
       {/* Stepper */}
-      <Stepper />
+      <Stepper currentStep={currentStep} completed={completed} />
 
       {/* Step content */}
       <Card className="border-[#E2E8F0] shadow-sm">

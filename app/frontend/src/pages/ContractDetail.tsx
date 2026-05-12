@@ -2,12 +2,11 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { client } from '@/lib/api';
 import { formatCLP, formatDate, getStatusColor, getStatusLabel } from '@/lib/utils';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Separator } from '@/components/ui/separator';
 import {
   ArrowLeft,
   MapPin,
@@ -123,7 +122,7 @@ export default function ContractDetail() {
         <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="resumen">Resumen</TabsTrigger>
           <TabsTrigger value="timeline">Línea de Tiempo</TabsTrigger>
-          <TabsTrigger value="deducciones">Deducciones</TabsTrigger>
+          <TabsTrigger value="descuentos">Descuentos</TabsTrigger>
           <TabsTrigger value="participantes">Participantes</TabsTrigger>
         </TabsList>
 
@@ -195,12 +194,12 @@ export default function ContractDetail() {
           </Card>
         </TabsContent>
 
-        {/* Deducciones */}
-        <TabsContent value="deducciones" className="mt-4">
+        {/* Descuentos */}
+        <TabsContent value="descuentos" className="mt-4">
           <Card className="border-[#E2E8F0]">
             <CardContent className="p-6">
               {deductions.length === 0 ? (
-                <p className="text-center text-[#64748B] py-8">No hay deducciones registradas</p>
+                <p className="text-center text-[#64748B] py-8">No hay descuentos registrados</p>
               ) : (
                 <div className="space-y-3">
                   {deductions.map((d) => (

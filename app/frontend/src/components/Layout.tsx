@@ -70,7 +70,7 @@ export default function Layout({ children }: LayoutProps) {
 
       {/* Sidebar */}
       <aside
-        className={`fixed lg:static inset-y-0 left-0 z-50 w-64 bg-white border-r border-[#E2E8F0] flex flex-col transition-transform duration-200 ${
+        className={`fixed lg:static inset-y-0 left-0 z-50 w-64 min-w-[16rem] max-w-[16rem] bg-white border-r border-[#E2E8F0] flex flex-col overflow-hidden transition-transform duration-200 ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         }`}
       >
@@ -92,11 +92,11 @@ export default function Layout({ children }: LayoutProps) {
         </div>
 
         {/* Role Selector - Segmented Control */}
-        <div className="px-4 py-4 border-b border-[#E2E8F0]">
+        <div className="px-4 py-4 border-b border-[#E2E8F0] min-w-0">
           <label className="text-xs font-medium text-[#64748B] mb-2 block">
             Rol activo
           </label>
-          <div className="flex rounded-lg border border-gray-200 bg-gray-50 p-0.5">
+          <div className="flex rounded-lg border border-gray-200 bg-gray-50 p-0.5 min-w-0">
             {roleConfig.map((role) => {
               const isActive = currentRole === role.value;
               const RoleIcon = role.icon;
@@ -104,14 +104,14 @@ export default function Layout({ children }: LayoutProps) {
                 <button
                   key={role.value}
                   onClick={() => setCurrentRole(role.value)}
-                  className={`flex-1 flex items-center justify-center gap-1.5 px-2 py-2 rounded-md text-xs font-medium transition-all ${
+                  className={`flex-1 flex items-center justify-center gap-1.5 px-2 py-2 rounded-md text-xs font-medium transition-all duration-200 ${
                     isActive
                       ? 'bg-emerald-50 text-emerald-700 border border-emerald-200 shadow-sm'
                       : 'text-gray-500 hover:bg-gray-100 border border-transparent'
                   }`}
                 >
-                  <RoleIcon className="h-3.5 w-3.5" />
-                  <span className="hidden xl:inline">{role.label}</span>
+                  <RoleIcon className="h-3.5 w-3.5 flex-shrink-0" />
+                  <span className="hidden 2xl:inline truncate">{role.label}</span>
                 </button>
               );
             })}
@@ -126,7 +126,7 @@ export default function Layout({ children }: LayoutProps) {
               <Link
                 key={item.name}
                 to={item.href}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
                   isActive
                     ? 'bg-emerald-50 text-emerald-700'
                     : 'text-[#64748B] hover:bg-gray-50 hover:text-[#0F172A]'
@@ -142,7 +142,7 @@ export default function Layout({ children }: LayoutProps) {
         {/* User info at bottom */}
         <div className="p-4 border-t border-[#E2E8F0]">
           <div className="flex items-center gap-3">
-            <div className="h-9 w-9 rounded-full bg-emerald-100 flex items-center justify-center">
+            <div className="h-9 w-9 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0">
               <span className="text-sm font-semibold text-emerald-700">
                 {user?.name?.charAt(0) || user?.email?.charAt(0) || 'U'}
               </span>
@@ -162,7 +162,7 @@ export default function Layout({ children }: LayoutProps) {
         {/* Top bar */}
         <header className="h-16 bg-white border-b border-[#E2E8F0] flex items-center justify-between px-4 lg:px-6 sticky top-0 z-30">
           <button
-            className="lg:hidden p-2 rounded-lg hover:bg-gray-100"
+            className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-all duration-200"
             onClick={() => setSidebarOpen(true)}
           >
             <Menu className="h-5 w-5 text-gray-600" />
