@@ -24,13 +24,15 @@ import {
   Building2,
   User,
   Briefcase,
+  ShieldAlert,
 } from 'lucide-react';
 import type { UserRole } from '@/types';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
   { name: 'Contratos', href: '/contracts', icon: FileText },
-  { name: 'Devoluciones', href: '/returns', icon: RotateCcw },
+  { name: 'Descuentos garantía', href: '/guarantee-deductions', icon: ShieldAlert },
+  { name: 'Devoluciones de garantía', href: '/returns', icon: RotateCcw },
   { name: 'Billetera', href: '/wallet', icon: Wallet },
   { name: 'Actividad', href: '/activity', icon: Activity },
   { name: 'Configuración', href: '/settings', icon: Settings },
@@ -170,7 +172,8 @@ export default function Layout({ children }: LayoutProps) {
 
           <div className="hidden lg:block">
             <h2 className="text-lg font-semibold text-[#0F172A]">
-              {navigation.find((n) => location.pathname.startsWith(n.href))?.name || 'Depoit'}
+              {navigation.find((n) => n.href !== '/dashboard' && location.pathname.startsWith(n.href))?.name ||
+              (location.pathname === '/dashboard' ? 'Dashboard' : 'Depoit')}
             </h2>
           </div>
 

@@ -94,3 +94,52 @@ export interface Notification {
 }
 
 export type UserRole = 'arrendador' | 'arrendatario' | 'corredor';
+
+export type GuaranteeDeductionStatus = 'pending' | 'negotiating' | 'approved' | 'rejected' | 'cancelled';
+export type GuaranteeDeductionCategory =
+  | 'limpieza'
+  | 'pintura'
+  | 'daño estructural'
+  | 'equipamiento'
+  | 'servicios pendientes'
+  | 'otro';
+
+export interface GuaranteeDeduction {
+  id: number;
+  contract_id: number;
+  created_by: string;
+  category: GuaranteeDeductionCategory;
+  title: string;
+  description?: string;
+  requested_amount: number;
+  agreed_amount?: number;
+  status: GuaranteeDeductionStatus;
+  created_at?: string;
+  updated_at?: string;
+}
+
+export interface GuaranteeDeductionFile {
+  id: number;
+  deduction_id: number;
+  file_url: string;
+  file_type?: string;
+  created_at?: string;
+}
+
+export type GuaranteeDeductionEventType =
+  | 'created'
+  | 'accepted'
+  | 'rejected'
+  | 'counter_proposed'
+  | 'cancelled';
+
+export interface GuaranteeDeductionEvent {
+  id: number;
+  deduction_id: number;
+  user_id: string;
+  event_type: GuaranteeDeductionEventType;
+  previous_amount?: number;
+  proposed_amount?: number;
+  comment?: string;
+  created_at?: string;
+}

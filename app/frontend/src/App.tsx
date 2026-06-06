@@ -16,6 +16,9 @@ import Wallet from './pages/Wallet';
 import ActivityPage from './pages/ActivityPage';
 import SettingsPage from './pages/SettingsPage';
 import ContractNew from './pages/ContractNew';
+import GuaranteeDeductions from './pages/GuaranteeDeductions';
+import GuaranteeDeductionNew from './pages/GuaranteeDeductionNew';
+import GuaranteeDeductionDetail from './pages/GuaranteeDeductionDetail';
 import Layout from './components/Layout';
 import { useAuth } from './contexts/AuthContext';
 
@@ -77,6 +80,30 @@ const AppRoutes = () => (
       element={
         <ProtectedRoute>
           <ContractDetail />
+        </ProtectedRoute>
+      }
+    />
+    <Route
+      path="/guarantee-deductions"
+      element={
+        <ProtectedRoute>
+          <GuaranteeDeductions />
+        </ProtectedRoute>
+      }
+    />
+    <Route
+      path="/guarantee-deductions/new"
+      element={
+        <ProtectedRoute>
+          <GuaranteeDeductionNew />
+        </ProtectedRoute>
+      }
+    />
+    <Route
+      path="/guarantee-deductions/:id"
+      element={
+        <ProtectedRoute>
+          <GuaranteeDeductionDetail />
         </ProtectedRoute>
       }
     />
