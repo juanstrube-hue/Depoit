@@ -93,30 +93,20 @@ export default function Layout({ children }: LayoutProps) {
           <p className="text-xs text-gray-400 mt-1 pl-9">Custodia segura de depósitos</p>
         </div>
 
-        {/* Role Selector - Segmented Control */}
-        <div className="px-4 py-4 border-b border-[#E2E8F0] min-w-0">
-          <label className="text-xs font-medium text-[#64748B] mb-2 block">
-            Rol activo
-          </label>
-          <div className="flex rounded-lg border border-gray-200 bg-gray-50 p-0.5 min-w-0">
-            {roleConfig.map((role) => {
-              const isActive = currentRole === role.value;
+        {/* Rol activo */}
+        <div className="px-4 py-3 border-b border-[#E2E8F0]">
+          <p className="text-xs font-medium text-[#64748B] mb-1.5">Rol activo</p>
+          <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-emerald-50 border border-emerald-200">
+            {(() => {
+              const role = roleConfig.find((r) => r.value === currentRole) || roleConfig[0];
               const RoleIcon = role.icon;
               return (
-                <button
-                  key={role.value}
-                  onClick={() => setCurrentRole(role.value)}
-                  className={`flex-1 flex items-center justify-center gap-1.5 px-2 py-2 rounded-md text-xs font-medium transition-all duration-200 ${
-                    isActive
-                      ? 'bg-emerald-50 text-emerald-700 border border-emerald-200 shadow-sm'
-                      : 'text-gray-500 hover:bg-gray-100 border border-transparent'
-                  }`}
-                >
-                  <RoleIcon className="h-3.5 w-3.5 flex-shrink-0" />
-                  <span className="hidden 2xl:inline truncate">{role.label}</span>
-                </button>
+                <>
+                  <RoleIcon className="h-4 w-4 text-emerald-600 flex-shrink-0" />
+                  <span className="text-sm font-medium text-emerald-700">{role.label}</span>
+                </>
               );
-            })}
+            })()}
           </div>
         </div>
 

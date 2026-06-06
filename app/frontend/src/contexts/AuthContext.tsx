@@ -43,10 +43,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [currentRole, setCurrentRole] = useState<UserRole>(() => {
-    const saved = localStorage.getItem('depoit_role');
-    return (saved as UserRole) || 'arrendador';
-  });
+  const [currentRole, setCurrentRole] = useState<UserRole>('arrendador');
 
   const checkAuthStatus = async () => {
     try {
@@ -59,6 +56,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           email: response.data.email || '',
           name: response.data.name || response.data.display_name || '',
         });
+        const role = response.data.role as UserRole;
+        if (role && ['arrendador', 'arrendatario', 'corredor'].includes(role)) {
+          setCurrentRole(role);
+        }
       } else {
         setUser(null);
       }
@@ -80,7 +81,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const handleSetRole = (role: UserRole) => {
     setCurrentRole(role);
-    localStorage.setItem('depoit_role', role);
   };
 
   useEffect(() => {
